@@ -1,9 +1,13 @@
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Case.Business
+namespace Case.Data
 {
     public class Transaction
     {
+        [Key]
+        public long TransactionId  { get; set; }
         public string MerchantCnpj;
         public long CheckoutCode;
         public string CipheredCardNumber;

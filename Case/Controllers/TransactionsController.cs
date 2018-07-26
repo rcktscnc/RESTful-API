@@ -4,27 +4,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using Case.Business;
+using Case.Data;
 
-namespace Case.Controllers
-{
-    [Route("api/[controller]")]
-    [ApiController]
-    public class TransactionsController : ControllerBase
-    {
-        private readonly IRepository _Repository;
+namespace Case.Controllers {
+  [Route("api/[controller]")]
+  [ApiController]
+  public class TransactionsController : ControllerBase {
+    private readonly IRepository<Transaction> _Repository;
 
-        public TransactionsController(IRepository repository)
-        {
-            _Repository = repository;
-        }
-
-        // GET api/values
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Transaction>>> Get()
-        {
-            var transactions = await _Repository.GetAllTransactions();
-            return transactions.ToList();
-        }
+    public TransactionsController(IRepository<Transaction> repository) {
+        _Repository = repository;
     }
+
+    [HttpGet]
+    public async Task<ActionResult<object>> Get() {
+        return new { Results = (await _Repository.GetAll()).ToList() };
+    }
+  }
 }
