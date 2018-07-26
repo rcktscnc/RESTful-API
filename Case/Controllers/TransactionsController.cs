@@ -10,18 +10,14 @@ namespace Case.Controllers {
   [Route("api/[controller]")]
   [ApiController]
   public class TransactionsController : ControllerBase {
-    private readonly TransactionRepository _Repository;
+    private readonly TransactionsRepository _Repository;
 
-    public TransactionsController(TransactionRepository repository) {
+    public TransactionsController(TransactionsRepository repository) {
       _Repository = repository;
     }
 
     [HttpGet]
     public async Task<ActionResult<object>> Get([FromQuery] TransactionQuery query) {
-      foreach (var e in query.Date) {
-        Console.WriteLine(e + " DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
-      }
-
       return new { Results = (await _Repository.Get(query)).ToList() };
     }
   }

@@ -9,4 +9,3 @@ namespace Case.Data {
     public List<string> Acquirer {get; set; } = new List<string>();
   }
 }
-

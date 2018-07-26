@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace Case.Data {
-  public class TransactionRepository : IRepository<Transaction> {
-    private readonly DbContext _Context;
+  public class TransactionsRepository : IRepository<Transaction> {
+    private readonly DbContext _Context; // Should be interface
     
-    public TransactionRepository(DbContext context) {
+    public TransactionsRepository(DbContext context) {
       _Context = context;
     }
 
