@@ -2,23 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Case.Data
-{
-    public class Transaction
-    {
-        [Key]
-        public long TransactionId  { get; set; }
-        public string MerchantCnpj;
-        public long CheckoutCode;
-        public string CipheredCardNumber;
-        public long AmountInCents;
-        public long Installments;
-        public string AcquirerName;
-        public string PaymentMethod;
-        public string CardBrandName;
-        public string Status;
-        public string StatusInfo;
-        public DateTime CreatedAt;
-        public DateTime AcquirerAuthorizationDateTime;
-    }
+namespace Case.Data {
+  public class Transaction : EntityBase {
+    public long TransactionId { get; set; }
+    public long MerchantCnpj { get; set; }
+    public long CheckoutCode { get; set; }
+    public string CipheredCardNumber { get; set; }
+    public long AmountInCent { get; set; }
+    public long Installments { get; set; }
+    public string AcquirerName { get; set; }
+    public string PaymentMethod { get; set; }
+    public string CardBrandName { get; set; }
+    public string Status { get; set; }
+    public string StatusInfo { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime AcquirerAuthorizationDateTime { get; set; }
+  }
 }

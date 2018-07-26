@@ -16,15 +16,17 @@ using Case.Data;
 
 namespace Case {
   public class Startup {
+    public IConfiguration Configuration { get; }
+    
     public Startup(IConfiguration configuration) {
       Configuration = configuration;
     }
 
-    public IConfiguration Configuration { get; }
-
     public void ConfigureServices(IServiceCollection services) {
       services.AddDbContext<InMemoryContext>(options => options.UseInMemoryDatabase("DbCase"));
-      services.AddTransient<IRepository<Transaction>, TransactionsRepository>();
+      services.AddScoped<DbContext>(options => options.GetRequiredService<InMemoryContext>());
+      services.AddScoped<TransactionRepository>();
+      services.AddScoped<IRepository<Transaction>, Repository<Transaction>>();
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
     }
 
