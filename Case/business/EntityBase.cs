@@ -5,8 +5,8 @@ using Newtonsoft.Json;
 namespace Case.Data {
   public abstract class EntityBase {
     [Key]
-    [JsonIgnore]
     [Ignore]
+    [JsonIgnore]
     public long Id { get; set; }
   }
 }
