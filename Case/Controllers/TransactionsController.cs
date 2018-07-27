@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using Case.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Case.Controllers {
   [Route("api/[controller]")]
@@ -18,6 +19,13 @@ namespace Case.Controllers {
 
     [HttpGet]
     public async Task<ActionResult<object>> Get([FromQuery] TransactionQuery query) {
+      return new { Results = (await _Repository.Get(query)).ToList() };
+    }
+
+    [HttpGet]
+    [Route("secure")]
+    [Authorize(Policy = "Transactions")]
+    public async Task<ActionResult<object>> GetSecure([FromQuery] TransactionQuery query) {
       return new { Results = (await _Repository.Get(query)).ToList() };
     }
   }
