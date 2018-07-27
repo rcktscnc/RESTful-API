@@ -27,7 +27,7 @@ namespace Case {
     }
 
     public void ConfigureServices(IServiceCollection services) {
-      // Using InMemoryDatabase so you can run the project easily when judging my code :)
+      // Using InMemoryDatabase so you can run the project easily when testing the project :)
       services.AddDbContext<InMemoryContext>(options => options.UseInMemoryDatabase("CaseDb"));
       services.AddScoped<DbContext>(options => options.GetRequiredService<InMemoryContext>());
       services.AddScoped<ITransactionsRepository, TransactionsRepository>();

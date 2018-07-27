@@ -1,6 +1,6 @@
 # Deploy
 
-Para iniciar a API, basta clonar o repositório, e executar os comandos no terminal (no diretório do projeto):
+Para iniciar o servidor, basta clonar o repositório, e executar os comandos no terminal (no diretório do projeto):
 ```
 dotnet restore
 dotnet run
@@ -9,9 +9,11 @@ O projeto deve funcionar *out of the box*, pois utiliza In Memory Database para 
 
 # Acessando Transações
 
+Por padrão, o servidor ouve conexões HTTPS na porta 5001 (`https://localhost:5001`).
+
 As transações podem ser acessadas por dois endpoints diferentes: `/api/transactions` e `/api/transactions/secure`, ambas respondem apenas a requests GET.
 
-A versão "transactions" não exige autenticação (para facilitar a demonstração), já a versão "transactions/secure" precisa de um Bearer Token enviado no header `Authorization` da request http. O header `Authorization` deve ter o seguinte formato: `Authorization: Bearer {Seu bearer token}`.
+A versão "/transactions" não exige autenticação (para facilitar a demonstração), já a versão "/transactions/secure" precisa de um Bearer Token enviado no header `Authorization` da request HTTP. O header `Authorization` deve ter o seguinte formato: `Authorization: Bearer {Seu bearer token}`.
 
 O Bearer Token pode ser conseguido fazendo uma request GET para o endpoint `/api/auth`. Como este projeto é apenas uma demonstração, não é necessário fornecer nenhum tipo de credencial.
 
