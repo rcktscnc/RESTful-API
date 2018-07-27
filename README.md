@@ -1,3 +1,12 @@
+# Deploy
+
+Para iniciar a API, basta clonar o repositório, e executar os comandos no terminal (no diretório do projeto):
+```
+dotnet restore
+dotnet run
+```
+O projeto deve funcionar *out of the box*, pois utiliza In Memory Database para facilitar a demonstração.
+
 # Acessando Transações
 
 As transações podem ser acessadas por dois endpoints diferentes: `/api/transactions` e `/api/transactions/secure`, ambas respondem apenas a requests GET.
@@ -29,6 +38,10 @@ Com exceção dos parâmetros `DateMin`, `DateMax`, `AmountMin`, `AmountMax`, to
 `/api/transactions?cnpj=28176030000172&cnpj=15593743000351`
 
 Não é recomendado usar os parâmetros `Date` e `DateMin`/`DateMax` na mesma query, já que `Date` filtra dias específicos, anulando o filtro do período entre `DateMin` e `DateMax`.
+
+# Dependências
+
+A única dependência externa é a biblioteca `CsvHelper`, que é utilizada para importar o arquivo de transações para o banco de dados.
 
 # Banco de dados
 
