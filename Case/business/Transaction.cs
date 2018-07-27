@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Case.Data {
   public class Transaction : EntityBase {
     public long TransactionId { get; set; }
-    public long MerchantCnpj { get; set; }
+    public string MerchantCnpj { get; set; }
     public long CheckoutCode { get; set; }
     public string CipheredCardNumber { get; set; }
     public long AmountInCent { get; set; }

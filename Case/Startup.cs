@@ -23,12 +23,10 @@ namespace Case {
     }
 
     public void ConfigureServices(IServiceCollection services) {
+      // Using InMemoryDatabase so you can run the project easily when judging my code :)
       services.AddDbContext<InMemoryContext>(options => options.UseInMemoryDatabase("CaseDb"));
-
       services.AddScoped<DbContext>(options => options.GetRequiredService<InMemoryContext>());
       services.AddScoped<TransactionsRepository>();
-      services.AddScoped<IRepository<Transaction>, Repository<Transaction>>();
-
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
     }
 
@@ -39,7 +37,7 @@ namespace Case {
         app.UseHsts();
       }
 
-      // Seed data to database
+      // Seed database
       using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope()) {
         scope.ServiceProvider.GetRequiredService<InMemoryContext>().Database.EnsureCreated();
       }
