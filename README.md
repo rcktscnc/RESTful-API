@@ -46,3 +46,7 @@ A única dependência externa é a biblioteca `CsvHelper`, que é utilizada para
 # Banco de dados
 
 Para facilitar o deploy na máquina de testes, essa demonstração utiliza o In Memory Database fornecido pelo próprio ASP.NET Core.
+
+# Ambiente
+
+O projeto foi desenvolvido com a versão 2.1.302 do .NET Core

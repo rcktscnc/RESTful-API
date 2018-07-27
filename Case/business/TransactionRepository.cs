@@ -5,15 +5,11 @@ using System.Linq;
 using System;
 
 namespace Case.Data {
-  public class TransactionsRepository : IRepository<Transaction> {
+  public class TransactionsRepository : ITransactionsRepository {
     private readonly DbContext _Context;
     
     public TransactionsRepository(DbContext context) {
       _Context = context;
-    }
-
-    public async Task<IEnumerable<Transaction>> GetAll() {
-      return await _Context.Set<Transaction>().ToListAsync();
     }
 
     public async Task<IEnumerable<Transaction>> Get(TransactionQuery query) {

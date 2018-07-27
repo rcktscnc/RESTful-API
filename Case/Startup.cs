@@ -30,7 +30,7 @@ namespace Case {
       // Using InMemoryDatabase so you can run the project easily when judging my code :)
       services.AddDbContext<InMemoryContext>(options => options.UseInMemoryDatabase("CaseDb"));
       services.AddScoped<DbContext>(options => options.GetRequiredService<InMemoryContext>());
-      services.AddScoped<TransactionsRepository>();
+      services.AddScoped<ITransactionsRepository, TransactionsRepository>();
 
       // It's not safe to store keys in config files, but this is just a demonstration
       var jwtSecretKey = Configuration["JwtSecretKey"];

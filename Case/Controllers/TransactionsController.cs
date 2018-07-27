@@ -11,9 +11,9 @@ namespace Case.Controllers {
   [Route("api/[controller]")]
   [ApiController]
   public class TransactionsController : ControllerBase {
-    private readonly TransactionsRepository _Repository;
+    private readonly ITransactionsRepository _Repository;
 
-    public TransactionsController(TransactionsRepository repository) {
+    public TransactionsController(ITransactionsRepository repository) {
       _Repository = repository;
     }
 
