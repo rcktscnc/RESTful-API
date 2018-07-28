@@ -4,6 +4,9 @@ using Newtonsoft.Json;
 
 namespace Case.Data
 {
+    /// <summary>
+    /// Base class for all EF Framework entities
+    /// </summary>
     public abstract class EntityBase
     {
         [Key]

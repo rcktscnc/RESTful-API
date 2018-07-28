@@ -13,7 +13,7 @@ namespace Case.Tests
 {
     public class AuthenticationControllerTests
     {
-        [Fact(DisplayName = "Should return 200 transaction entries")]
+        [Fact(DisplayName = "Should return valid token")]
         public void GetTest()
         {
             var policy = "SomePolicy";

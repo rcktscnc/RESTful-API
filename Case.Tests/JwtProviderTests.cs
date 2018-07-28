@@ -12,7 +12,7 @@ namespace Case.Tests
 {
     public class JwtProviderTests
     {
-        [Fact(DisplayName = "Should match payload")]
+        [Fact(DisplayName = "Should create valid token")]
         public void JwtProviderTest()
         {
             var policy = "SomePolicy";

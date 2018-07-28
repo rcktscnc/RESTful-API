@@ -22,11 +22,11 @@ O Bearer Token pode ser adquirido fazendo uma request GET para o endpoint `/api/
 |Parâmetro |  Exemplo | Detalhe |
 |----------|------|------|
 | | `/api/transactions` | Retorna todas as transações |
-| CNPJ | `/api/transactions?cnpj=28176030000172&cnpj=15593743000351` ||
-| Date | `/api/transactions?date=2018-03-01&date=2018-03-27` |  |
-| Brand |  `/api/transactions?brand=Visa&brand=Mastercard` ||
-| Acquirer | `/api/transactions?acquirer=Stone&acquirer=Cielo` ||
-| Status | `/api/transactions?status=Aprovada&status=Recusada` ||
+| CNPJ | `/api/transactions?cnpj=28176030000172&cnpj=15593743000351` | Pode ser repetido na query |
+| Date | `/api/transactions?date=2018-03-01&date=2018-03-27` | Pode ser repetido na query |
+| Brand |  `/api/transactions?brand=Visa&brand=Mastercard` | Pode ser repetido na query |
+| Acquirer | `/api/transactions?acquirer=Stone&acquirer=Cielo` | Pode ser repetido na query |
+| Status | `/api/transactions?status=Aprovada&status=Recusada` | Pode ser repetido na query |
 | DateMin | `/api/transactions?datemin=2018-03-01T00:55:36&datemax=2018-03-01T01:02:38` | Obrigatório usar em conjunto com DateMax |
 | DateMax | `/api/transactions?datemin=2018-03-01T00:55:36&datemax=2018-03-01T01:02:38` | Obrigatório usar em conjunto com DateMin |
 | AmountMin | `/api/transactions?amountmin=1&amountmax=1000` | Obrigatório usar em conjunto com AmountMax |

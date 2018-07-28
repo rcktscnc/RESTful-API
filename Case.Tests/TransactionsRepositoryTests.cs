@@ -17,7 +17,7 @@ namespace Case.Tests
             _Repository = RepositoryProvider.Instance.NewRepository();
         }
 
-        private async Task<List<Transaction>> Get(TransactionQuery query)
+        private async Task<List<Transaction>> GetTransactions(TransactionQuery query)
         {
             return (await _Repository.Get(query)).ToList();
         }
@@ -25,7 +25,7 @@ namespace Case.Tests
         [Fact(DisplayName = "Should contain 200 transaction entries -- All transactions")]
         public async Task AllTransactions()
         {
-            var transactions = await Get(new TransactionQuery());
+            var transactions = await GetTransactions(new TransactionQuery());
             Assert.Equal(200, transactions.Count);
         }
 
@@ -34,7 +34,7 @@ namespace Case.Tests
         {
             var query = new TransactionQuery();
             query.Brand.Add("Visa");
-            var transactions = await Get(query);
+            var transactions = await GetTransactions(query);
             Assert.True(transactions.Where(e => e.CardBrandName == "Visa").Count() == transactions.Count && transactions.Count > 0);
         }
 
@@ -44,7 +44,7 @@ namespace Case.Tests
             var query = new TransactionQuery();
             query.Cnpj.Add("15593743000351");
             query.Cnpj.Add("28176030000172");
-            var transactions = await Get(query);
+            var transactions = await GetTransactions(query);
             Assert.Equal(12, transactions.Count);
         }
 
@@ -53,7 +53,7 @@ namespace Case.Tests
         {
             var query = new TransactionQuery();
             query.Date.Add(DateTime.Parse("2018-03-01"));
-            var transactions = await Get(query);
+            var transactions = await GetTransactions(query);
             Assert.Equal(113, transactions.Count);
         }
 
@@ -63,7 +63,7 @@ namespace Case.Tests
             var query = new TransactionQuery();
             query.Acquirer.Add("Stone");
             query.Acquirer.Add("Cielo");
-            var transactions = await Get(query);
+            var transactions = await GetTransactions(query);
             Assert.Equal(131, transactions.Count);
         }
 
@@ -72,7 +72,7 @@ namespace Case.Tests
         {
             var query = new TransactionQuery();
             query.Status.Add("Recusada");
-            var transactions = await Get(query);
+            var transactions = await GetTransactions(query);
             Assert.Equal(18, transactions.Count);
         }
 
@@ -82,7 +82,7 @@ namespace Case.Tests
             var query = new TransactionQuery();
             query.DateMin = DateTime.Parse("2018-03-01T00:55:36");
             query.DateMax = DateTime.Parse("2018-03-01T01:02:38");
-            var transactions = await Get(query);
+            var transactions = await GetTransactions(query);
             Assert.Equal(7, transactions.Count);
         }
 
@@ -92,7 +92,7 @@ namespace Case.Tests
             var query = new TransactionQuery();
             query.AmountMin = 1;
             query.AmountMax = 1000;
-            var transactions = await Get(query);
+            var transactions = await GetTransactions(query);
             Assert.Equal(29, transactions.Count);
         }
 
@@ -101,7 +101,7 @@ namespace Case.Tests
         {
             var query = new TransactionQuery();
             query.Page = 2;
-            var transactions = await Get(query);
+            var transactions = await GetTransactions(query);
             Assert.Equal(30, transactions.Count);
         }
 
@@ -111,7 +111,7 @@ namespace Case.Tests
             var query = new TransactionQuery();
             query.Page = 2;
             query.PageSize = 35;
-            var transactions = await Get(query);
+            var transactions = await GetTransactions(query);
             Assert.Equal(35, transactions.Count);
         }
     }

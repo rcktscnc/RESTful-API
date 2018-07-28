@@ -18,62 +18,74 @@ using Microsoft.IdentityModel.Tokens;
 using Case.Data;
 using Case.Auth;
 
-namespace Case {
-  public class Startup {
-    public IConfiguration Configuration { get; }
-    
-    public Startup(IConfiguration configuration) {
-      Configuration = configuration;
+namespace Case
+{
+    public class Startup
+    {
+        public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public void ConfigureServices(IServiceCollection services)
+        {
+            // Use InMemoryDatabase so you can run the project right out of the box :)
+            services.AddDbContext<InMemoryContext>(options => options.UseInMemoryDatabase("CaseDb"));
+            services.AddScoped<DbContext>(options => options.GetRequiredService<InMemoryContext>());
+            services.AddScoped<ITransactionsRepository, TransactionsRepository>();
+
+            // It's not safe to store keys in config files, but this is just a demonstration project
+            var jwtSecretKey = Configuration["JwtSecretKey"];
+            var jwtIssuer = "transactions-auth.com";
+            var jwtAudience = "transactions-clients.com";
+            var jwtRole = "Transactions";
+
+            services.AddScoped<IJwtProvider>(provider => new JwtProvider(jwtRole, jwtSecretKey, jwtIssuer, jwtAudience));
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidIssuer = jwtIssuer,
+                    ValidAudience = jwtAudience,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecretKey))
+                };
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(jwtRole, p => p.RequireAuthenticatedUser().RequireRole(jwtRole));
+            });
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+        }
+
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseHsts();
+            }
+
+            // Populate the database for the demonstration
+            using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                scope.ServiceProvider.GetRequiredService<InMemoryContext>().Database.EnsureCreated();
+            }
+
+            app.UseAuthentication();
+            app.UseHttpsRedirection();
+            app.UseMvc();
+        }
     }
-
-    public void ConfigureServices(IServiceCollection services) {
-      // Using InMemoryDatabase so you can run the project easily when testing the project :)
-      services.AddDbContext<InMemoryContext>(options => options.UseInMemoryDatabase("CaseDb"));
-      services.AddScoped<DbContext>(options => options.GetRequiredService<InMemoryContext>());
-      services.AddScoped<ITransactionsRepository, TransactionsRepository>();
-
-      // It's not safe to store keys in config files, but this is just a demonstration
-      var jwtSecretKey = Configuration["JwtSecretKey"];
-      var jwtIssuer = "transactions-auth.com";
-      var jwtAudience = "transactions-clients.com";
-      var jwtRole = "Transactions";
-
-      services.AddScoped<IJwtProvider>(provider => new JwtProvider(jwtRole, jwtSecretKey, jwtIssuer, jwtAudience));
-
-      services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
-        options.TokenValidationParameters = new TokenValidationParameters {
-          ValidateIssuer = true,
-          ValidateAudience = true,
-          ValidIssuer = jwtIssuer,
-          ValidAudience = jwtAudience,
-          ValidateLifetime = true,
-          ValidateIssuerSigningKey = true,
-          IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecretKey))
-        };
-      });
-
-      services.AddAuthorization(options => {
-        options.AddPolicy(jwtRole, p => p.RequireAuthenticatedUser().RequireRole(jwtRole));
-      });
-
-      services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-    }
-
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
-      if (env.IsDevelopment()) {
-        app.UseDeveloperExceptionPage();
-      } else {
-        app.UseHsts();
-      }
-
-      // Seed database
-      using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope()) {
-        scope.ServiceProvider.GetRequiredService<InMemoryContext>().Database.EnsureCreated();
-      }
-      
-      app.UseAuthentication();
-      app.UseHttpsRedirection();
-      app.UseMvc();
-    }
-  }
 }
