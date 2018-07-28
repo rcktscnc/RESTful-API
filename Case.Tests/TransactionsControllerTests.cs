@@ -19,9 +19,18 @@ namespace Case.Tests
             _Repository = RepositoryProvider.NewRepository();
         }
 
-        [Fact(DisplayName = "Should match payload")]
-        public void TransactionControllerTest() {
+        [Fact(DisplayName = "Should return 200 transaction entries")]
+        public async Task GetTest() {
             var controller = new TransactionsController(_Repository);
+            var value = (await controller.Get(new TransactionQuery())).Value;
+            Assert.Equal(200, value.Results.Count);
+        }
+
+        [Fact(DisplayName = "Should return 200 transaction entries")]
+        public async Task GetSecureTest() {
+            var controller = new TransactionsController(_Repository);
+            var value = (await controller.GetSecure(new TransactionQuery())).Value;
+            Assert.Equal(200, value.Results.Count);
         }
     }
 }

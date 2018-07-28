@@ -11,14 +11,18 @@ namespace Case.Controllers {
   public class AuthenticationController : ControllerBase {
     private readonly IJwtProvider _JwtProvider;
 
+    public class ResultFormat {
+      public string Token;
+    }
+
     public AuthenticationController(IJwtProvider jwtProvider) {
       _JwtProvider = jwtProvider;
     }
 
     [HttpGet]
     [AllowAnonymous]
-    public ActionResult<object> Get() {
-      return new { Token = _JwtProvider.GetToken() };
+    public ActionResult<ResultFormat> Get() {
+      return new ResultFormat() { Token = _JwtProvider.GetToken() };
     }
   }
 }

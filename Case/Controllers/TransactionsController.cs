@@ -13,20 +13,24 @@ namespace Case.Controllers {
   public class TransactionsController : ControllerBase {
     private readonly ITransactionsRepository _Repository;
 
+    public class ResultFormat {
+      public List<Transaction> Results;
+    }
+
     public TransactionsController(ITransactionsRepository repository) {
       _Repository = repository;
     }
 
     [HttpGet]
-    public async Task<ActionResult<object>> Get([FromQuery] TransactionQuery query) {
-      return new { Results = (await _Repository.Get(query)).ToList() };
+    public async Task<ActionResult<ResultFormat>> Get([FromQuery] TransactionQuery query) {
+      return new ResultFormat() { Results = (await _Repository.Get(query)).ToList() };
     }
 
     [HttpGet]
     [Route("secure")]
     [Authorize(Policy = "Transactions")]
-    public async Task<ActionResult<object>> GetSecure([FromQuery] TransactionQuery query) {
-      return new { Results = (await _Repository.Get(query)).ToList() };
+    public async Task<ActionResult<ResultFormat>> GetSecure([FromQuery] TransactionQuery query) {
+      return new ResultFormat() { Results = (await _Repository.Get(query)).ToList() };
     }
   }
 }
