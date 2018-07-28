@@ -14,7 +14,7 @@ namespace Case.Tests
 
         public TransactionsRepositoryTests()
         {
-            _Repository = RepositoryProvider.NewRepository();
+            _Repository = RepositoryProvider.Instance.NewRepository();
         }
 
         private async Task<List<Transaction>> Get(TransactionQuery query)

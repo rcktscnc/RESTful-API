@@ -4,26 +4,28 @@ using Case.Data;
 
 namespace Case.Tests
 {
-    public static class RepositoryProvider
+    public sealed class RepositoryProvider
     {
-        private static bool _IsDbEmpty = true;
-        private static object _Lock = new object();
+        private static readonly RepositoryProvider _Instance = new RepositoryProvider();
 
-        public static ITransactionsRepository NewRepository()
+        static RepositoryProvider() { }
+
+        private RepositoryProvider()
         {
-            lock (_Lock)
-            {
-                var builder = new DbContextOptionsBuilder<InMemoryContext>().UseInMemoryDatabase("CaseDb");
-                var context = new InMemoryContext(builder.Options);
+            CreateContext().Database.EnsureCreated();
+        }
 
-                if (_IsDbEmpty)
-                {
-                    context.Database.EnsureCreated();
-                    _IsDbEmpty = false;
-                }
+        public static RepositoryProvider Instance { get { return _Instance; } }
 
-                return new TransactionsRepository(context);
-            }
+        public ITransactionsRepository NewRepository()
+        {
+            return new TransactionsRepository(CreateContext());
+        }
+
+        private InMemoryContext CreateContext()
+        {
+            var builder = new DbContextOptionsBuilder<InMemoryContext>().UseInMemoryDatabase("CaseDb");
+            return new InMemoryContext(builder.Options);
         }
     }
 }

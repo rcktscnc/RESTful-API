@@ -17,7 +17,7 @@ namespace Case.Tests
 
         public TransactionsControllerTests()
         {
-            _Repository = RepositoryProvider.NewRepository();
+            _Repository = RepositoryProvider.Instance.NewRepository();
         }
 
         [Fact(DisplayName = "Should return 200 transaction entries")]
