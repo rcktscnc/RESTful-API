@@ -14,5 +14,7 @@ namespace Case.Data
         public DateTime DateMax { get; set; }
         public long AmountMin { get; set; }
         public long AmountMax { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; } = 30;
     }
 }

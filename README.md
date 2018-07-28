@@ -31,14 +31,16 @@ O Bearer Token pode ser adquirido fazendo uma request GET para o endpoint `/api/
 | DateMax | `/api/transactions?datemin=2018-03-01T00:55:36&datemax=2018-03-01T01:02:38` | Obrigatório usar em conjunto com DateMin |
 | AmountMin | `/api/transactions?amountmin=1&amountmax=1000` | Obrigatório usar em conjunto com AmountMax |
 | AmountMin | `/api/transactions?amountmin=1&amountmax=1000` | Obrigatório usar em conjunto com AmountMin |
+| Page | `/api/transactions?page=2` | O valor padrão é de 30 itens por página |
+| PageSize | `/api/transactions?page=2&pagesize=6` | Obrigatório usar em conjunto com Page |
 
 Todos os parâmetros podem ser usados na mesma query. Exemplo usando vários parâmetros:
 
 `/api/transactions?status=Aprovada&brand=Visa&date=2018-03-01&date=2018-03-27&cnpj=77404852000179&cnpj=30481457000126`
 
-Com exceção dos parâmetros `DateMin`, `DateMax`, `AmountMin`, `AmountMax`, todos os pârametros podem ser usados múltiplas vezes na mesma query para criar um filtro mais abrangente: Exemplo:
+Os parâmetros `CNPJ`, `Date`, `Brand`, `Acquirer` e `Status`, podem ser usados múltiplas vezes na mesma query para criar um filtro mais abrangente. Exemplo:
 
-`/api/transactions?cnpj=28176030000172&cnpj=15593743000351`
+`/api/transactions?cnpj=28176030000172&cnpj=15593743000351&brand=Visa&brand=Mastercard`
 
 Não é recomendado usar os parâmetros `Date` e `DateMin`/`DateMax` na mesma query, já que um dos parâmetros anulará o outro.
 

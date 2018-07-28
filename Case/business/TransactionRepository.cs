@@ -25,6 +25,8 @@ namespace Case.Data
                 .Where(e => query.Status.Count == 0 ? true : query.Status.Contains(e.Status))
                 .Where(e => query.DateMin == default(DateTime) || query.DateMax == default(DateTime) ? true : e.AcquirerAuthorizationDateTime >= query.DateMin && e.AcquirerAuthorizationDateTime <= query.DateMax)
                 .Where(e => query.AmountMin == 0 || query.AmountMax == 0 ? true : e.AmountInCent >= query.AmountMin && e.AmountInCent <= query.AmountMax)
+                .Skip((query.Page - 1) * query.PageSize)
+                .Take(query.Page == 0 ? 200 : query.PageSize)
                 .ToListAsync();
         }
     }

@@ -95,5 +95,24 @@ namespace Case.Tests
             var transactions = await Get(query);
             Assert.Equal(29, transactions.Count);
         }
+
+        [Fact(DisplayName = "Should contain only 30 transaction entries -- Specific Page")]
+        public async Task SpecificPageTransactions()
+        {
+            var query = new TransactionQuery();
+            query.Page = 2;
+            var transactions = await Get(query);
+            Assert.Equal(30, transactions.Count);
+        }
+
+        [Fact(DisplayName = "Should contain only 35 transaction entries -- Specific Page and PageSize")]
+        public async Task SpecificPageAndPageSizeTransactions()
+        {
+            var query = new TransactionQuery();
+            query.Page = 2;
+            query.PageSize = 35;
+            var transactions = await Get(query);
+            Assert.Equal(35, transactions.Count);
+        }
     }
 }
