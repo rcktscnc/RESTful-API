@@ -1,7 +1,9 @@
-using Microsoft.EntityFrameworkCore;
 using System;
+using Microsoft.EntityFrameworkCore;
+using Xunit;
 
 using Case.Data;
+
 
 namespace Case.Tests
 {

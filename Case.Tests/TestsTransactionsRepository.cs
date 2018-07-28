@@ -8,11 +8,11 @@ using Case.Data;
 
 namespace Case.Tests
 {
-    public class TransactionsRepositoryTests
+    public class TestsTransactionsRepository
     {
         private readonly ITransactionsRepository _Repository;
 
-        public TransactionsRepositoryTests()
+        public TestsTransactionsRepository()
         {
             _Repository = RepositoryProvider.Instance.NewRepository();
         }

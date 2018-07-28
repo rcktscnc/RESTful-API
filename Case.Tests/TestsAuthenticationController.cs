@@ -11,7 +11,7 @@ using Case.Auth;
 
 namespace Case.Tests
 {
-    public class AuthenticationControllerTests
+    public class TestsAuthenticationController
     {
         [Fact(DisplayName = "Should return valid token")]
         public void GetTest()

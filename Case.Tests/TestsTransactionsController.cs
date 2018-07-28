@@ -11,11 +11,11 @@ using Case.Data;
 
 namespace Case.Tests
 {
-    public class TransactionsControllerTests
+    public class TestsTransactionsController
     {
         private readonly ITransactionsRepository _Repository;
 
-        public TransactionsControllerTests()
+        public TestsTransactionsController()
         {
             _Repository = RepositoryProvider.Instance.NewRepository();
         }

@@ -10,7 +10,7 @@ using Case.Auth;
 
 namespace Case.Tests
 {
-    public class JwtProviderTests
+    public class TestsJwtProvider
     {
         [Fact(DisplayName = "Should create valid token")]
         public void JwtProviderTest()

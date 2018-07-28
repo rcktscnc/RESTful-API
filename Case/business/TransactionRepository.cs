@@ -15,6 +15,7 @@ namespace Case.Data
             _Context = context;
         }
 
+        // In "Real World" applications, IO tasks are done asynchronously
         public async Task<IEnumerable<Transaction>> Get(TransactionQuery query)
         {
             return await _Context.Set<Transaction>()
