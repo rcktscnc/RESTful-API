@@ -1,6 +1,6 @@
 # Deploy
 
-Para iniciar o servidor, basta clonar o repositório, e executar os comandos no terminal (no diretório do projeto):
+Para iniciar o servidor, basta clonar o repositório, e executar os comandos no terminal (no diretório raiz do projeto Case):
 ```
 dotnet restore
 dotnet run
@@ -11,16 +11,17 @@ O projeto deve funcionar *out of the box*, pois utiliza In Memory Database para 
 
 Por padrão, o servidor ouve conexões HTTPS na porta 5001 (`https://localhost:5001`).
 
-As transações podem ser acessadas por dois endpoints diferentes: `/api/transactions` e `/api/transactions/secure`, ambas respondem apenas a requests GET.
+As transações podem ser acessadas por dois endpoints diferentes: `/api/transactions` e `/api/transactions/secure`. Ambos tem exatamente a mesma funcionalidade e respondem apenas a requests do tipo GET.
 
 A versão "/transactions" não exige autenticação (para facilitar a demonstração), já a versão "/transactions/secure" precisa de um Bearer Token enviado no header `Authorization` da request HTTP. O header `Authorization` deve ter o seguinte formato: `Authorization: Bearer {Seu bearer token}`.
 
-O Bearer Token pode ser conseguido fazendo uma request GET para o endpoint `/api/auth`. Como este projeto é apenas uma demonstração, não é necessário fornecer nenhum tipo de credencial.
+O Bearer Token pode ser adquirido fazendo uma request GET para o endpoint `/api/auth`. Como este projeto é apenas uma demonstração, não é necessário fornecer nenhum tipo de credencial.
 
 # Parâmetros
 
 |Parâmetro |  Exemplo | Detalhe |
 |----------|------|------|
+| | `/api/transactions` | Retorna todas as transações |
 | CNPJ | `/api/transactions?cnpj=28176030000172&cnpj=15593743000351` ||
 | Date | `/api/transactions?date=2018-03-01&date=2018-03-27` |  |
 | Brand |  `/api/transactions?brand=Visa&brand=Mastercard` ||
@@ -39,15 +40,15 @@ Com exceção dos parâmetros `DateMin`, `DateMax`, `AmountMin`, `AmountMax`, to
 
 `/api/transactions?cnpj=28176030000172&cnpj=15593743000351`
 
-Não é recomendado usar os parâmetros `Date` e `DateMin`/`DateMax` na mesma query, já que `Date` filtra dias específicos, anulando o filtro do período entre `DateMin` e `DateMax`.
+Não é recomendado usar os parâmetros `Date` e `DateMin`/`DateMax` na mesma query, já que um dos parâmetros anulará o outro.
 
 # Dependências
 
-A única dependência externa é a biblioteca `CsvHelper`, que é utilizada para importar o arquivo de transações para o banco de dados.
+`CsvHelper` é utilizada para importar o arquivo de transações para o banco de dados.
 
 # Banco de dados
 
-Para facilitar o deploy na máquina de testes, essa demonstração utiliza o In Memory Database fornecido pelo próprio ASP.NET Core.
+Para facilitar o deploy na máquina de testes, essa demonstração utiliza o In Memory Database fornecido pelo próprio ASP.NET Core. A Entitify Framework Core é utilizada para acessar o banco.
 
 # Ambiente
 

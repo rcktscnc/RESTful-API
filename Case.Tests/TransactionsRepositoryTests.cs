@@ -13,7 +13,7 @@ namespace Case.Tests
         private readonly ITransactionsRepository _Repository;
 
         public TransactionsRepositoryTests() {
-            _Repository = RepositoryFactory.NewRepository();
+            _Repository = RepositoryProvider.NewRepository();
         }
 
         private async Task<List<Transaction>> Get(TransactionQuery query) {
