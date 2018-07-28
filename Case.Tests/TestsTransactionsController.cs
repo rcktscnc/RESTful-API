@@ -6,8 +6,10 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using Xunit;
 
+using Case.Models;
+using Case.Business;
 using Case.Controllers;
-using Case.Data;
+
 
 namespace Case.Tests
 {

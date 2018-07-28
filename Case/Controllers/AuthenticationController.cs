@@ -2,8 +2,8 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
-using Case.Data;
-using Case.Auth;
+using Case.Business;
+using Case.Authentication;
 
 namespace Case.Controllers
 {

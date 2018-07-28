@@ -7,7 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Xunit;
 
 using Case.Controllers;
-using Case.Auth;
+using Case.Authentication;
 
 namespace Case.Tests
 {

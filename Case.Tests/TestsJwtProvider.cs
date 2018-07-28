@@ -6,7 +6,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using Xunit;
 
-using Case.Auth;
+using Case.Authentication;
 
 namespace Case.Tests
 {

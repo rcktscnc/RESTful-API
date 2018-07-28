@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using CsvHelper.Configuration.Attributes;
 using Newtonsoft.Json;
 
-namespace Case.Data
+namespace Case.Models
 {
     /// <summary>
     /// Base class for all EF Framework entities

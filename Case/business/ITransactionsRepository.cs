@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Case.Data
+using Case.Models;
+
+namespace Case.Business
 {
     public interface ITransactionsRepository
     {

@@ -15,8 +15,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
-using Case.Data;
-using Case.Auth;
+using Case.Business;
+using Case.Authentication;
 
 namespace Case
 {

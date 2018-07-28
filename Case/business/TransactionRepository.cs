@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System;
 
-namespace Case.Data
+using Case.Models;
+
+namespace Case.Business
 {
     public class TransactionsRepository : ITransactionsRepository
     {

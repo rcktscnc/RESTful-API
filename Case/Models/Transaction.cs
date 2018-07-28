@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Case.Data
+namespace Case.Models
 {
     public class Transaction : EntityBase
     {

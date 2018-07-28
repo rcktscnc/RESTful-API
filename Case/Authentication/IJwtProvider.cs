@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Case.Auth
+namespace Case.Authentication
 {
     public interface IJwtProvider
     {

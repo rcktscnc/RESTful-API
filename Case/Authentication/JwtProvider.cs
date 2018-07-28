@@ -6,7 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Case.Auth
+namespace Case.Authentication
 {
     public class JwtProvider : IJwtProvider
     {

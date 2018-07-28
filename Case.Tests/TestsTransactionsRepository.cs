@@ -4,7 +4,8 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Xunit;
 
-using Case.Data;
+using Case.Models;
+using Case.Business;
 
 namespace Case.Tests
 {
