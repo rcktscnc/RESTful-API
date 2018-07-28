@@ -5,7 +5,7 @@ Para iniciar o servidor, basta clonar o repositório, e executar os comandos no 
 dotnet restore
 dotnet run
 ```
-O projeto deve funcionar *out of the box*, pois utiliza In Memory Database para facilitar a demonstração.
+O projeto deve funcionar *right out of the box*, pois utiliza In Memory Database para facilitar a demonstração.
 
 # Acessando Transações
 
@@ -44,11 +44,11 @@ Não é recomendado usar os parâmetros `Date` e `DateMin`/`DateMax` na mesma qu
 
 # Dependências
 
-`CsvHelper` é utilizada para importar o arquivo de transações para o banco de dados.
+A biblioteca `CsvHelper` é utilizada para importar o arquivo de transações para o banco de dados.
 
 # Banco de dados
 
-Para facilitar o deploy na máquina de testes, essa demonstração utiliza o In Memory Database fornecido pelo próprio ASP.NET Core. A Entitify Framework Core é utilizada para acessar o banco.
+Para facilitar o deploy, essa demonstração utiliza In Memory Database fornecido pelo próprio ASP.NET Core. A Entitify Framework Core é utilizada para acessar o banco.
 
 # Ambiente
 

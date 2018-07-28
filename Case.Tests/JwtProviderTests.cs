@@ -13,7 +13,8 @@ namespace Case.Tests
     public class JwtProviderTests
     {
         [Fact(DisplayName = "Should match payload")]
-        public void JwtProviderTest() {
+        public void JwtProviderTest()
+        {
             var policy = "SomePolicy";
             var issuer = "Issuer";
             var audience = "Audience";
@@ -21,7 +22,7 @@ namespace Case.Tests
             var jwtProvider = new JwtProvider(policy, "1234567890ABCDEFGHI", issuer, audience);
             var tokenString = jwtProvider.GetToken();
             var token = new JwtSecurityTokenHandler().ReadToken(tokenString) as JwtSecurityToken;
-            
+
             Assert.Equal(policy, token.Claims.First().Value);
             Assert.Equal(issuer, token.Issuer);
             Assert.Equal(audience, token.Audiences.First());
