@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Case.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class TransactionsController : ControllerBase
     {
@@ -26,8 +26,8 @@ namespace Case.Controllers
             _Repository = repository;
         }
 
-        // This version of the endpoint is not behind an authentication layer and is
-        // only provided so that you can test queries more easily
+        // This endpoint is not behind an authentication layer and is
+        // only provided for demonstration purposes.
         [HttpGet]
         [Route("")]
         public async Task<ActionResult<ResultFormat>> Get([FromQuery] TransactionsQuery query)

@@ -37,7 +37,8 @@ namespace Case
             services.AddScoped<DbContext>(options => options.GetRequiredService<InMemoryContext>());
             services.AddScoped<ITransactionsRepository, TransactionsRepository>();
 
-            // It's not safe to store keys in config files, but this is just a demonstration project
+            // It's not safe to store keys in config files, but this is just a demonstration project.
+            // Important keys usually are stored in Environment Variables.
             var jwtSecretKey = Configuration["JwtSecretKey"];
             var jwtIssuer = "transactions-auth.com";
             var jwtAudience = "transactions-clients.com";
@@ -64,6 +65,8 @@ namespace Case
                 options.AddPolicy(jwtRole, p => p.RequireAuthenticatedUser().RequireRole(jwtRole));
             });
 
+            // Formating JSON responses to be indented because this is a requirement in the project description.
+            // Usually, the response would be minified to make the payload footprint smaller.
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddJsonOptions(options => options.SerializerSettings.Formatting = Formatting.Indented );

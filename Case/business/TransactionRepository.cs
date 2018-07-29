@@ -17,9 +17,11 @@ namespace Case.Business
             _Context = context;
         }
 
-        // I/O tasks are done asynchronously to improve performance
+        // I/O tasks are done asynchronously to improve performance when the server
+        // is receiving thousands of requests per minute.
         public async Task<IEnumerable<Transaction>> GetTransactions(TransactionsQuery query)
         {
+            // TransactionId is unique, so there's no need to create a complex query.
             if (query.Id != 0)
             {
                 return await _Context.Set<Transaction>().Where(e => e.TransactionId == query.Id).ToListAsync();
