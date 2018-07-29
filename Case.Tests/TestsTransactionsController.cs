@@ -22,20 +22,20 @@ namespace Case.Tests
             _Repository = RepositoryProvider.Instance.NewRepository();
         }
 
-        [Fact(DisplayName = "Should return 200 transaction entries")]
+        [Fact(DisplayName = "Should return 20 transaction entries")]
         public async Task GetTest()
         {
             var controller = new TransactionsController(_Repository);
             var value = (await controller.Get(new TransactionQuery())).Value;
-            Assert.Equal(200, value.Results.Count);
+            Assert.Equal(20, value.Results.Count);
         }
 
-        [Fact(DisplayName = "Should return 200 transaction entries")]
+        [Fact(DisplayName = "Should return 20 transaction entries")]
         public async Task GetSecureTest()
         {
             var controller = new TransactionsController(_Repository);
             var value = (await controller.GetSecure(new TransactionQuery())).Value;
-            Assert.Equal(200, value.Results.Count);
+            Assert.Equal(20, value.Results.Count);
         }
     }
 }

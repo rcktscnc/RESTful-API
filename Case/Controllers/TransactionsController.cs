@@ -26,10 +26,13 @@ namespace Case.Controllers
             _Repository = repository;
         }
 
+        // This version of the endpoint is not behind an authentication layer and is
+        // only provided so that you can test queries more easily
         [HttpGet]
+        [Route("")]
         public async Task<ActionResult<ResultFormat>> Get([FromQuery] TransactionQuery query)
         {
-            return new ResultFormat() { Results = (await _Repository.Get(query)).ToList() };
+            return new ResultFormat() { Results = (await _Repository.GetTransactions(query)).ToList() };
         }
 
         [HttpGet]
@@ -37,7 +40,7 @@ namespace Case.Controllers
         [Authorize(Policy = "Transactions")]
         public async Task<ActionResult<ResultFormat>> GetSecure([FromQuery] TransactionQuery query)
         {
-            return new ResultFormat() { Results = (await _Repository.Get(query)).ToList() };
+            return new ResultFormat() { Results = (await _Repository.GetTransactions(query)).ToList() };
         }
     }
 }

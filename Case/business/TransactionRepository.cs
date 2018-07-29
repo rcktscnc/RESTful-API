@@ -18,18 +18,35 @@ namespace Case.Business
         }
 
         // In "Real World" applications, IO tasks are done asynchronously
-        public async Task<IEnumerable<Transaction>> Get(TransactionQuery query)
+        public async Task<IEnumerable<Transaction>> GetTransactions(TransactionQuery query)
         {
-            return await _Context.Set<Transaction>()
+            var queriable = _Context.Set<Transaction>()
                 .Where(e => query.Brand.Count == 0 ? true : query.Brand.Contains(e.CardBrandName))
                 .Where(e => query.Cnpj.Count == 0 ? true : query.Cnpj.Contains(e.MerchantCnpj))
                 .Where(e => query.Date.Count == 0 ? true : query.Date.Contains(e.AcquirerAuthorizationDateTime.Date))
                 .Where(e => query.Acquirer.Count == 0 ? true : query.Acquirer.Contains(e.AcquirerName))
                 .Where(e => query.Status.Count == 0 ? true : query.Status.Contains(e.Status))
                 .Where(e => query.DateMin == default(DateTime) || query.DateMax == default(DateTime) ? true : e.AcquirerAuthorizationDateTime >= query.DateMin && e.AcquirerAuthorizationDateTime <= query.DateMax)
-                .Where(e => query.AmountMin == 0 || query.AmountMax == 0 ? true : e.AmountInCent >= query.AmountMin && e.AmountInCent <= query.AmountMax)
+                .Where(e => query.AmountMin == 0 || query.AmountMax == 0 ? true : e.AmountInCent >= query.AmountMin && e.AmountInCent <= query.AmountMax);
+                
+            switch (query.OrderBy) {
+                case "date_asc":
+                    queriable = queriable.OrderBy(t => t.AcquirerAuthorizationDateTime);
+                    break;
+                case "date_desc":
+                    queriable = queriable.OrderByDescending(t => t.AcquirerAuthorizationDateTime);
+                    break;
+                case "amount_asc":
+                    queriable = queriable.OrderBy(t => t.AmountInCent);
+                    break;
+                case "amount_desc":
+                    queriable = queriable.OrderByDescending(t => t.AmountInCent);
+                    break;
+            }
+
+            return await queriable
                 .Skip((query.Page - 1) * query.PageSize)
-                .Take(query.Page == 0 ? 200 : query.PageSize)
+                .Take(query.PageSize)
                 .ToListAsync();
         }
     }

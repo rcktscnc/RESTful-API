@@ -14,7 +14,8 @@ namespace Case.Models
         public DateTime DateMax { get; set; }
         public long AmountMin { get; set; }
         public long AmountMax { get; set; }
-        public int Page { get; set; }
-        public int PageSize { get; set; } = 30;
+        public int Page { get; set; } = 1;
+        public int PageSize { get; set; } = 20;
+        public string OrderBy { get; set; }
     }
 }

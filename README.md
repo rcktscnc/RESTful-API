@@ -21,7 +21,10 @@ O Bearer Token pode ser adquirido fazendo uma request GET para o endpoint `/api/
 
 |Parâmetro |  Exemplo | Detalhe |
 |----------|------|------|
-| | `/api/transactions` | Retorna todas as transações |
+| | `/api/transactions` | Retona a primeira página de resultados (20 resultados) |
+| Page | `/api/transactions?page=2` | O valor padrão é de 20 resultados por página |
+| PageSize | `/api/transactions?page=2&pagesize=6` | Altera o valor máximo de resultados por página |
+| OrderBy | `/api/transactions?orderby=date_desc` | Possíveis valores para este parâmetro são `date_asc`, `date_desc`, `amount_asc` e `amount_desc` |
 | CNPJ | `/api/transactions?cnpj=28176030000172&cnpj=15593743000351` | Pode ser repetido na query |
 | Date | `/api/transactions?date=2018-03-01&date=2018-03-27` | Pode ser repetido na query |
 | Brand |  `/api/transactions?brand=Visa&brand=Mastercard` | Pode ser repetido na query |
@@ -31,8 +34,6 @@ O Bearer Token pode ser adquirido fazendo uma request GET para o endpoint `/api/
 | DateMax | `/api/transactions?datemin=2018-03-01T00:55:36&datemax=2018-03-01T01:02:38` | Obrigatório usar em conjunto com DateMin |
 | AmountMin | `/api/transactions?amountmin=1&amountmax=1000` | Obrigatório usar em conjunto com AmountMax |
 | AmountMin | `/api/transactions?amountmin=1&amountmax=1000` | Obrigatório usar em conjunto com AmountMin |
-| Page | `/api/transactions?page=2` | O valor padrão é de 30 itens por página |
-| PageSize | `/api/transactions?page=2&pagesize=6` | Obrigatório usar em conjunto com Page |
 
 Todos os parâmetros podem ser usados na mesma query. Exemplo usando vários parâmetros:
 
