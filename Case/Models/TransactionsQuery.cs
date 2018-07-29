@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Case.Models
 {
-    public class TransactionQuery
+    public class TransactionsQuery
     {
         public List<string> Cnpj { get; set; } = new List<string>();
         public List<DateTime> Date { get; set; } = new List<DateTime>();
@@ -16,6 +16,11 @@ namespace Case.Models
         public long AmountMax { get; set; }
         public int Page { get; set; } = 1;
         public int PageSize { get; set; } = 20;
+        public long Id { get; set; }
+
+        /// <summary>
+        /// Acceptable values are "date_asc", "date_desc", "amount_asc", and "amount_desc"
+        /// </summary>
         public string OrderBy { get; set; }
     }
 }

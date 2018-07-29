@@ -30,7 +30,7 @@ namespace Case.Controllers
         // only provided so that you can test queries more easily
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult<ResultFormat>> Get([FromQuery] TransactionQuery query)
+        public async Task<ActionResult<ResultFormat>> Get([FromQuery] TransactionsQuery query)
         {
             return new ResultFormat() { Results = (await _Repository.GetTransactions(query)).ToList() };
         }
@@ -38,7 +38,7 @@ namespace Case.Controllers
         [HttpGet]
         [Route("secure")]
         [Authorize(Policy = "Transactions")]
-        public async Task<ActionResult<ResultFormat>> GetSecure([FromQuery] TransactionQuery query)
+        public async Task<ActionResult<ResultFormat>> GetSecure([FromQuery] TransactionsQuery query)
         {
             return new ResultFormat() { Results = (await _Repository.GetTransactions(query)).ToList() };
         }

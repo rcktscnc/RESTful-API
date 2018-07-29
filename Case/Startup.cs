@@ -14,6 +14,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 
 using Case.Business;
 using Case.Authentication;
@@ -63,7 +64,9 @@ namespace Case
                 options.AddPolicy(jwtRole, p => p.RequireAuthenticatedUser().RequireRole(jwtRole));
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddJsonOptions(options => options.SerializerSettings.Formatting = Formatting.Indented );
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

@@ -7,6 +7,6 @@ namespace Case.Business
 {
     public interface ITransactionsRepository
     {
-        Task<IEnumerable<Transaction>> GetTransactions(TransactionQuery query);
+        Task<IEnumerable<Transaction>> GetTransactions(TransactionsQuery query);
     }
 }

@@ -26,7 +26,7 @@ namespace Case.Tests
         public async Task GetTest()
         {
             var controller = new TransactionsController(_Repository);
-            var value = (await controller.Get(new TransactionQuery())).Value;
+            var value = (await controller.Get(new TransactionsQuery())).Value;
             Assert.Equal(20, value.Results.Count);
         }
 
@@ -34,7 +34,7 @@ namespace Case.Tests
         public async Task GetSecureTest()
         {
             var controller = new TransactionsController(_Repository);
-            var value = (await controller.GetSecure(new TransactionQuery())).Value;
+            var value = (await controller.GetSecure(new TransactionsQuery())).Value;
             Assert.Equal(20, value.Results.Count);
         }
     }
