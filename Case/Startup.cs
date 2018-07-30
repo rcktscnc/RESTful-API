@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -65,7 +66,9 @@ namespace Case
                 options.AddPolicy(jwtRole, p => p.RequireAuthenticatedUser().RequireRole(jwtRole));
             });
 
-            // Formating JSON responses to be indented because this is a requirement in the project description.
+            services.AddCors();
+
+            // Formatting JSON responses to be indented because this is a requirement in the project description.
             // Usually, the response would be minified to make the payload footprint smaller.
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
@@ -88,6 +91,12 @@ namespace Case
             {
                 scope.ServiceProvider.GetRequiredService<InMemoryContext>().Database.EnsureCreated();
             }
+
+            // Cross-Origin Requests are very important for Restful APIs.
+            // Usually, the API will be called from several different domains and CORS must be enabled
+            // and configured accordingly. In this demonstration, I'm allowing any domain to access
+            // any HTTP method.
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseAuthentication();
             app.UseHttpsRedirection();
