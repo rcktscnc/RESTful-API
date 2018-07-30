@@ -15,7 +15,7 @@ Outras técnicas utilizadas:
 
 - Proteção da API usando JWT para autenticação e autorização de acesso aos endpoints
 - I/O assíncrono para aumentar a performance do servidor
-- Versionamento dos endpoints (`/api/v1/`)
+- Versionamento da API (`/api/v1/`)
 - Configuração de Cross-Origin Requests
 - Testes Unitários
 - Princípios SOLID
@@ -48,12 +48,12 @@ O Bearer Token pode ser adquirido fazendo uma request GET para o endpoint `/api/
 | PageSize | Não |`/api/v1/transactions?page=2&pagesize=6` | Altera o valor máximo de resultados por página |
 | OrderBy | Não |`/api/v1/transactions?orderby=date_desc` | Possíveis valores para este parâmetro são `date_asc`, `date_desc`, `amount_asc` e `amount_desc` |
 | CNPJ | Sim |`/api/v1/transactions?cnpj=28176030000172&cnpj=15593743000351` |  |
-| Date | Sim |`/api/v1/transactions?date=2018-03-01&date=2018-03-27` | Ideal para pesquisar dias separados, por exemplo: dia 10, 15 e 30. Horário da autorização da transação |
+| Date | Sim |`/api/v1/transactions?date=2018-03-01&date=2018-03-27` | Ideal para pesquisar dias separados, por exemplo: dia 10, 15 e 30 |
 | Brand | Sim |`/api/v1/transactions?brand=Visa&brand=Mastercard` |  |
 | Acquirer | Sim |`/api/v1/transactions?acquirer=Stone&acquirer=Cielo` |  |
 | Status | Sim |`/api/v1/transactions?status=Aprovada&status=Recusada` |  |
-| DateMin | Não |`/api/v1/transactions?datemin=2018-03-01T00:55:36&datemax=2018-03-01T01:02:38` | Ideal para pesquisar período específico. Horário da autorização da transação |
-| DateMax | Não |`/api/v1/transactions?datemin=2018-03-01T00:55:36&datemax=2018-03-01T01:02:38` | Ideal para pesquisar período específico. Horário da autorização da transação |
+| DateMin | Não |`/api/v1/transactions?datemin=2018-03-01T00:55:36&datemax=2018-03-01T01:02:38` | Ideal para pesquisas baseadas em uma sequência de dias, horas, minutos, ou segundos |
+| DateMax | Não |`/api/v1/transactions?datemin=2018-03-01T00:55:36&datemax=2018-03-01T01:02:38` | Ideal para pesquisas baseadas em uma sequência de dias, horas, minutos, ou segundos |
 | AmountMin | Não |`/api/v1/transactions?amountmin=1&amountmax=1000` | Valor da transação em centavos |
 | AmountMax | Não |`/api/v1/transactions?amountmin=1&amountmax=1000` | Valor da transação em centavos |
 | Id | Não |`/api/v1/transactions?id=20` | Id da transação. Não pode ser usado em conjunto com nenhum outro parâmetro |
